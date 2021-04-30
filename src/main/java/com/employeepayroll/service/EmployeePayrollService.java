@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.employeepayroll.dto.EmployeeDTO;
+import com.employeepayroll.exception.EmployeePayrollException;
+import com.employeepayroll.exception.EmployeePayrollException.EXCEPTION_TYPE;
 import com.employeepayroll.model.Employee;
 import com.employeepayroll.repository.IEmployeePayrollRepository;
 
@@ -48,7 +50,10 @@ public class EmployeePayrollService implements IEmployeePayrollService{
 
 	@Override
 	public Employee getEmployee(int id) {
-		return employeePayrollRepo.findById(id).get();
+		return employeePayrollRepo.findById(id)
+								  .orElseThrow(()-> 
+								  new EmployeePayrollException("Employee doesn't exist", 
+								      EXCEPTION_TYPE.EMPLOYEE_NOT_FOUND));
 	}
 
 }

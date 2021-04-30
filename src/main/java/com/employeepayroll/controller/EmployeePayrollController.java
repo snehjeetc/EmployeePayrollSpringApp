@@ -1,5 +1,7 @@
 package com.employeepayroll.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,27 +27,37 @@ public class EmployeePayrollController {
 	
 	@GetMapping
 	public ResponseEntity<ResponseDTO> getEmployees(){
-		return new ResponseEntity<>(new ResponseDTO(employeePayrollService.getEmployee(), "Fetched data successfully"), HttpStatus.OK);
+		return new ResponseEntity<>(new ResponseDTO(
+				employeePayrollService.getEmployee(), 
+				"Fetched data successfully"), HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<ResponseDTO> getEmployee(@PathVariable int id){
-		return new ResponseEntity<>(new ResponseDTO(employeePayrollService.getEmployee(id), "Details Fetched Successfully"), HttpStatus.OK);
+		return new ResponseEntity<>(new ResponseDTO(
+				employeePayrollService.getEmployee(id), 
+				"Details Fetched Successfully"), HttpStatus.OK);
 	}
 	
 	@PostMapping
-	public ResponseEntity<ResponseDTO> postEmployee(@RequestBody EmployeeDTO employeeDto){
-		return new ResponseEntity<>(new ResponseDTO(employeePayrollService.postEmployee(employeeDto), "Accepted"), HttpStatus.ACCEPTED);
+	public ResponseEntity<ResponseDTO> postEmployee(@Valid @RequestBody EmployeeDTO employeeDto){
+		return new ResponseEntity<>(new ResponseDTO(
+				employeePayrollService.postEmployee(employeeDto), 
+				"Accepted"), HttpStatus.ACCEPTED);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<ResponseDTO> putEmployee(@PathVariable int id, @RequestBody EmployeeDTO employeeDto){
-		return new ResponseEntity<>(new ResponseDTO(employeePayrollService.putEmployee(id, employeeDto), "Successfully Updated"), HttpStatus.ACCEPTED);
+	public ResponseEntity<ResponseDTO> putEmployee(@PathVariable int id,@Valid @RequestBody EmployeeDTO employeeDto){
+		return new ResponseEntity<>(new ResponseDTO(
+				employeePayrollService.putEmployee(id, employeeDto), 
+				"Successfully Updated"), HttpStatus.ACCEPTED);
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ResponseDTO> deleteEmployee(@PathVariable int id){
-		return new ResponseEntity<>(new ResponseDTO(employeePayrollService.deleteEmployee(id), "Removed employee data successfully"), HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(new ResponseDTO(
+				employeePayrollService.deleteEmployee(id), 
+				"Removed employee data successfully"), HttpStatus.ACCEPTED);
 	}
 
 }
