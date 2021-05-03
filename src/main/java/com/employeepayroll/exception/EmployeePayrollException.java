@@ -1,5 +1,6 @@
 package com.employeepayroll.exception;
 
+@SuppressWarnings("serial")
 public class EmployeePayrollException extends RuntimeException{
 	public 	enum EXCEPTION_TYPE{
 		EMPLOYEE_NOT_FOUND

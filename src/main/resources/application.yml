@@ -1,0 +1,32 @@
+spring:
+  config:
+    activate:
+      on-profile: DEV
+logging:
+  level:
+    root: WARN
+    '[org.springframework.web]': WARN
+    '[org.hibernate]': ERROR
+    '[com.employeepayroll]': DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%level] [%thread] [%logger{5}:%line] %msg%n"
+   
+---
+
+spring:
+  config:
+    activate:
+      on-profile: PROD 
+  main:
+    banner-mode: off
+logging:
+  file:
+    name: application.log
+  level:
+    root: WARN
+    '[org.springframework.web]': WARN
+    '[org.hibernate]': ERROR
+    '[com.employeepayroll]': DEBUG
+  pattern:
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%level] [%thread] [%logger{5}:%line] %msg%n"
+    console: 
