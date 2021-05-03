@@ -7,7 +7,7 @@ logging:
     root: WARN
     '[org.springframework.web]': WARN
     '[org.hibernate]': ERROR
-    '[com.employeepayroll]': DEBUG
+    '[com.addressbook]': DEBUG
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%level] [%thread] [%logger{5}:%line] %msg%n"
    
@@ -19,6 +19,10 @@ spring:
       on-profile: PROD 
   main:
     banner-mode: off
+  datasource:
+    url: ${url}
+    username: ${username}
+    password: ${passoword}
 logging:
   file:
     name: application.log
@@ -26,7 +30,7 @@ logging:
     root: WARN
     '[org.springframework.web]': WARN
     '[org.hibernate]': ERROR
-    '[com.employeepayroll]': DEBUG
+    '[com.addressbook]': DEBUG
   pattern:
     file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%level] [%thread] [%logger{5}:%line] %msg%n"
     console: 

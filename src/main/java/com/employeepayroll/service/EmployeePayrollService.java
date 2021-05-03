@@ -17,55 +17,57 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Service layer to perform operations after getting from REST controller
+ * 
  * @author snehjeetc12
  */
 @Service
 @Slf4j
-public class EmployeePayrollService implements IEmployeePayrollService{
+public class EmployeePayrollService implements IEmployeePayrollService {
 
 	@Autowired
 	private IEmployeePayrollRepository employeePayrollRepo;
-	
+
 	@Autowired
 	private ModelMapper modelMapper;
 
 	/**
 	 * Fetches all the employee payroll data in the database
+	 * 
 	 * @return List<Employee>
 	 */
 	@Override
 	public List<Employee> getEmployee() {
 		return employeePayrollRepo.findAll();
 	}
-	
+
 	/**
-	 * Returns the employee who has the required id 
+	 * Returns the employee who has the required id
+	 * 
 	 * @throws EmployeePayrollException
 	 * @param id
 	 * @return Employee
 	 */
 	@Override
 	public Employee getEmployee(int id) {
-		return employeePayrollRepo.findById(id)
-								  .orElseThrow(()-> 
-								  new EmployeePayrollException("Employee doesn't exist", 
-								      EXCEPTION_TYPE.EMPLOYEE_NOT_FOUND));
+		return employeePayrollRepo.findById(id).orElseThrow(
+				() -> new EmployeePayrollException("Employee doesn't exist", EXCEPTION_TYPE.EMPLOYEE_NOT_FOUND));
 	}
 
 	/**
-	 * Fetches List of Employee to the caller having same given 
-	 * department
+	 * Fetches List of Employee to the caller having same given department
+	 * 
 	 * @param department
 	 * @return List<Employee>
 	 */
 	@Override
-	public List<Employee> getEmployeeByDepartment(String department){
+	public List<Employee> getEmployeeByDepartment(String department) {
 		return employeePayrollRepo.findEmployeeByDepartment(department);
 	}
 
 	/**
-	 * Creates a new Employee object from the EmployeeDTO object
-	 * and adds it to the database
+	 * Creates a new Employee object from the EmployeeDTO object and adds it to the
+	 * database
+	 * 
 	 * @Param EmployeeDTO
 	 * @return Employee
 	 */
@@ -78,6 +80,7 @@ public class EmployeePayrollService implements IEmployeePayrollService{
 
 	/**
 	 * Updates the Employee payroll data of given id with EmployeeDTO object
+	 * 
 	 * @param id, EmployeeDTO
 	 * @return Employee
 	 */
@@ -91,6 +94,7 @@ public class EmployeePayrollService implements IEmployeePayrollService{
 
 	/**
 	 * Delete the employee payroll data from the database of given id
+	 * 
 	 * @param id
 	 * @return Employee
 	 */
